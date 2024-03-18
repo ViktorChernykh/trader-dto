@@ -1,3 +1,3 @@
-# product-dto
+# trader-dto
 
-A Data Transfer Objects for product service.
+A Data Transfer Objects for trader app.
