@@ -12,6 +12,7 @@ public struct ChartDto: Codable {
 	public let market: String
 	public let board: String
 	public let security: String
+	public let interval: Int
 	public let candles: [CandleDto]
 
 	// MARK: - Init
@@ -20,12 +21,14 @@ public struct ChartDto: Codable {
 		market: String,
 		board: String,
 		security: String,
+		interval: Int,
 		candles: [CandleDto]
 	) {
 		self.engine = engine
 		self.market = market
 		self.board = board
 		self.security = security
+		self.interval = interval
 		self.candles = candles
 	}
 }

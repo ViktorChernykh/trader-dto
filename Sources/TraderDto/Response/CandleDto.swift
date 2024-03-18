@@ -18,7 +18,6 @@ public struct CandleDto: Codable {
 	public let volume: Int
 	public let begin: Date
 	public let end: Date
-	public let interval: Int
 
 	// MARK: - Init
 	public init(
@@ -30,8 +29,7 @@ public struct CandleDto: Codable {
 		value: Double,
 		volume: Int,
 		begin: Date,
-		end: Date,
-		interval: Int
+		end: Date
 	) {
 		self.id = id
 		self.opens = opens
@@ -42,6 +40,5 @@ public struct CandleDto: Codable {
 		self.volume = volume
 		self.begin = begin
 		self.end = end
-		self.interval = interval
 	}
 }
