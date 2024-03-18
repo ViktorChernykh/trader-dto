@@ -9,7 +9,6 @@ import Foundation
 
 public struct CandleDto: Codable {
 	// MARK: - Stored properties
-	public let id: UUID
 	public let opens: Double
 	public let close: Double
 	public let high: Double
@@ -21,7 +20,6 @@ public struct CandleDto: Codable {
 
 	// MARK: - Init
 	public init(
-		id: UUID,
 		opens: Double,
 		close: Double,
 		high: Double,
@@ -31,7 +29,6 @@ public struct CandleDto: Codable {
 		begin: Date,
 		end: Date
 	) {
-		self.id = id
 		self.opens = opens
 		self.close = close
 		self.high = high

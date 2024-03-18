@@ -19,6 +19,7 @@ public struct ChartsRequestDto: Codable {
 
 public struct ChartRequestDto: Codable {
 	// MARK: - Stored properties
+	public let chartId: UUID
 	public let engineId: UUID
 	public let marketId: UUID
 	public let boardId: UUID
@@ -30,6 +31,7 @@ public struct ChartRequestDto: Codable {
 
 	// MARK: - Init
 	public init(
+		chartId: UUID,
 		engineId: UUID,
 		marketId: UUID,
 		boardId: UUID,
@@ -39,6 +41,7 @@ public struct ChartRequestDto: Codable {
 		till: Date,
 		limit: Int?
 	) {
+		self.chartId = chartId
 		self.engineId = engineId
 		self.marketId = marketId
 		self.boardId = boardId
