@@ -7,8 +7,9 @@
 
 import Foundation
 
+/// Request object for charts.
 public struct ChartsRequestDto: Codable {
-	// MARK: - Stored properties
+	// MARK: Stored properties
 	public let charts: [ChartRequestDto]
 
 	// MARK: - Init
@@ -18,7 +19,7 @@ public struct ChartsRequestDto: Codable {
 }
 
 public struct ChartRequestDto: Codable {
-	// MARK: - Stored properties
+	// MARK: Stored properties
 	public let chartId: UUID
 	public let engineId: UUID
 	public let marketId: UUID

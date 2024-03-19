@@ -8,7 +8,7 @@
 import Foundation
 
 public struct BackTestDto: Codable {
-	// MARK: - Stored properties
+	// MARK: Stored properties
 	public let startMoney: Double
 	public let strategy: String
 	public let dateStart: Date?

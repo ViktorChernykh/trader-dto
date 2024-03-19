@@ -5,8 +5,9 @@
 //  Created by Victor Chernykh on 23/02/2024.
 //
 
+/// 
 public struct SecuritiesUpdateDto: Codable {
-	// MARK: - Stored properties
+	// MARK: Stored properties
 	public let page: Int?
 	public let per: Int?
 

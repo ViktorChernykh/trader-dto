@@ -7,16 +7,14 @@
 
 import Foundation
 
+/// Response object for item of chart.
 public struct CandleDto: Codable {
-	// MARK: - Stored properties
+	// MARK: Stored properties
 	public let opens: Double
 	public let close: Double
 	public let high: Double
 	public let low: Double
-	public let value: Double
-	public let volume: Int
 	public let begin: Date
-	public let end: Date
 
 	// MARK: - Init
 	public init(
@@ -24,18 +22,12 @@ public struct CandleDto: Codable {
 		close: Double,
 		high: Double,
 		low: Double,
-		value: Double,
-		volume: Int,
-		begin: Date,
-		end: Date
+		begin: Date
 	) {
 		self.opens = opens
 		self.close = close
 		self.high = high
 		self.low = low
-		self.value = value
-		self.volume = volume
 		self.begin = begin
-		self.end = end
 	}
 }
