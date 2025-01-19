@@ -9,24 +9,12 @@ public enum ProfitSpreadUnits: Int, Sendable, Identifiable {
 
 	public var id: Int { self.rawValue }
 
-	/// Percent.
-	/// Значение в процентах.
+	/// Value in percent.
 	case percent = 1
 
-	/// Значение в единицах цены.
+	/// Value in price units.
 	case pips = 2
 
-	/// By market.
+	/// Market price.
 	case market = 3
-
-	public var description: String {
-		switch self {
-		case .percent:
-			"Значение в процентах"
-		case .pips:
-			"Значение в единицах цены"
-		case .market:
-			"По рынку"
-		}
-	}
 }

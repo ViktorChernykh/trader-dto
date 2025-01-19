@@ -14,17 +14,4 @@ public enum SubjectType: String, Codable, Sendable, CaseIterable, Identifiable {
 	case value
 	case ema7
 	case ema14
-
-	public var description: String {
-		switch self {
-		case .price:
-			"Price:"
-		case .value:
-			"Value:"
-		case .ema7:
-			"Ema 7:"
-		case .ema14:
-			"Ema 14:"
-		}
-	}
 }

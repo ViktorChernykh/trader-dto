@@ -15,13 +15,4 @@ public enum OrderDirection: Int, Codable, Sendable, CaseIterable, Identifiable {
 
 	/// Sell direction.
 	case sell = 1
-
-	public var description: String {
-		switch self {
-		case .buy:
-			"buy"
-		case .sell:
-			"sell"
-		}
-	}
 }

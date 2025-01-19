@@ -9,20 +9,9 @@ public enum StopQuantityUnits: Int, Sendable, Identifiable {
 
 	public var id: Int { self.rawValue }
 
-	/// Percent.
-	/// Значение а процентах.
+	/// Value in percent.
 	case percent = 1
 
-	/// Lots.
-	/// Значение в лотах.
+	/// Value in lots.
 	case lots = 2
-
-	public var description: String {
-		switch self {
-		case .percent:
-			"Значение а процентах"
-		case .lots:
-			"Значение в лотах"
-		}
-	}
 }

@@ -26,15 +26,10 @@ public struct TaskDto: Codable, Sendable, Identifiable {
 	public var quantityTimes: Int
 	public let action: Int
 	public let expired: Date?
-	public let expireType: DateType
+	public let expireType: TaskDateType
 	public let name: String
 	public let notification: String
 	public let createdAt: Date
-
-	public var description: String {
-		let pr2: String = price2 == nil ? "" : ", \(price2!)"
-		return "\(secid), \(compareType.description), \(price1)\(pr2)"
-	}
 
 	// MARK: - Init
 	public init(
@@ -53,7 +48,7 @@ public struct TaskDto: Codable, Sendable, Identifiable {
 		quantityTimes: Int,
 		action: Int,
 		expired: Date?,
-		expireType: DateType,
+		expireType: TaskDateType,
 		name: String,
 		notification: String,
 		createdAt: Date

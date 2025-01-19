@@ -12,15 +12,4 @@ public enum OrderType: Int, Sendable, CaseIterable, Identifiable {
 	case order = 1
 	case stopLoss = 2
 	case takeProfit = 3
-
-	public var description: String {
-		switch self {
-		case .order:
-			"Order"
-		case .stopLoss:
-			"Stop loss"
-		case .takeProfit:
-			"Take profit"
-		}
-	}
 }

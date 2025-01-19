@@ -21,13 +21,4 @@ public enum OrderStatusType: Int, Sendable, Identifiable {
 
 	/// Order is matched.
 	case matched = 4
-
-	public var description: String {
-		switch self {
-		case .none: "none"
-		case .active: "active"
-		case .cancelled: "cancelled"
-		case .matched: "matched"
-		}
-	}
 }

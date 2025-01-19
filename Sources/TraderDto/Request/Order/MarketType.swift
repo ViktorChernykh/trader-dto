@@ -28,16 +28,4 @@ public enum MarketType: Int, Sendable, CaseIterable {
 
 	/// Moscow Exchange option market.
 	case options = 21
-
-	public var description: String {
-		switch self {
-		case .stock: "stock"
-		case .forts: "forts"
-		case .spbex: "spbex"
-		case .mma: "mma"
-		case .ets: "ets"
-		case .bonds: "bonds"
-		case .options: "options"
-		}
-	}
 }
