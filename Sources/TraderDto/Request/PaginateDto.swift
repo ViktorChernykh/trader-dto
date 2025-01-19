@@ -1,12 +1,12 @@
 //
-//  SecuritiesUpdateDto.swift
+//  PaginateDto.swift
+//	trader-dto
 //
-//
-//  Created by Victor Chernykh on 23/02/2024.
+//  Created by Victor Chernykh on 09.06.2024.
 //
 
-/// 
-public struct SecuritiesUpdateDto: Codable {
+public struct PaginateDto: Codable, Sendable {
+
 	// MARK: Stored properties
 	public let page: Int?
 	public let per: Int?

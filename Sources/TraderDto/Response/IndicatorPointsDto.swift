@@ -1,16 +1,17 @@
 //
 //  IndicatorPointsDto.swift
-//
+//	trader-dto
 //
 //  Created by Victor Chernykh on 20/03/2024.
 //
 
-import Foundation
+import struct Foundation.Date
 
 public typealias OscillatorPointsDto = IndicatorPointsDto
 
 /// Response object for indicator's item.
-public struct IndicatorPointsDto: Codable {
+public struct IndicatorPointsDto: Codable, Sendable {
+
 	// MARK: Stored properties
 	public let values: [Double]
 	public let begin: Date

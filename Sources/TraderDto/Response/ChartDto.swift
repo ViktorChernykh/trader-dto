@@ -1,51 +1,156 @@
 //
 //  ChartDto.swift
-//
+//	trader-dto
 //
 //  Created by Victor Chernykh on 18/03/2024.
 //
 
-import Foundation
+import struct Foundation.Calendar
 
-/// Response object for build chart.
-public struct ChartDto: Codable {
+extension ChartDto: Hashable {
+	public func hash(into hasher: inout Hasher) {
+		hasher.combine(id)
+		hasher.combine(exchange)
+		hasher.combine(board)
+		hasher.combine(secid)
+		hasher.combine(interval)
+		hasher.combine(candles)
+	}
+}
+
+extension ChartDto: Equatable {
+	public static func == (lhs: ChartDto, rhs: ChartDto) -> Bool {
+		lhs.exchange == rhs.exchange &&
+		lhs.board == rhs.board &&
+		lhs.secid == rhs.secid &&
+		lhs.candles.count == rhs.candles.count &&
+		lhs.candles.first == rhs.candles.first
+	}
+}
+
+extension ChartDto: Comparable {
+	public static func < (lhs: ChartDto, rhs: ChartDto) -> Bool {
+		lhs.id < rhs.id &&
+		lhs.exchange < rhs.exchange &&
+		lhs.board < rhs.board &&
+		lhs.secid < rhs.secid/* &&
+		lhs.candles < rhs.candles*/
+	}
+}
+
+/// Response object for draw chart.
+public struct ChartDto: Codable, Identifiable, Sendable {
+
 	// MARK: Stored properties
-	/// ChartView's id  from client.
-	public let chartId: UUID
-	public let candles: [CandleDto]
-	/// Chart date end.
-	public let end: Date
-	/// Chart interval.
+	public var id: String {
+		"\(exchange)\(board)\(secid)\(interval)"
+	}
+	public let exchange: String
+	public let board: String
+	public let secid: String
 	public let interval: Int
-	public let securityId: String
-	public let engineId: UUID
-	public let marketId: UUID
-	public let boardId: UUID
-	public let indicators: [IndicatorDto]
-	public let oscillators: [OscillatorDto]
+	public var candles: [CandleDto]
 
 	// MARK: - Init
 	public init(
-		chartId: UUID = UUID(),
-		candles: [CandleDto],
-		end: Date,
+		exchange: String,
+		board: String,
+		secid: String,
 		interval: Int,
-		securityId: String,
-		engineId: UUID,
-		marketId: UUID,
-		boardId: UUID,
-		indicators: [IndicatorDto],
-		oscillators: [OscillatorDto]
+		candles: [CandleDto]
 	) {
-		self.chartId = chartId
-		self.candles = candles
-		self.end = end
+		self.exchange = exchange
+		self.board = board
+		self.secid = secid
 		self.interval = interval
-		self.securityId = securityId
-		self.engineId = engineId
-		self.marketId = marketId
-		self.boardId = boardId
-		self.indicators = indicators
-		self.oscillators = oscillators
+		self.candles = candles
+	}
+	
+	public var intervalName: String {
+		switch interval {
+		case 1:
+			"M1"
+		case 5:
+			"M5"
+		case 10:
+			"M10"
+		case 60:
+			"H1"
+		case 24:
+			"D1"
+		case 7:
+			"W1"
+		case 31:
+			"m1"
+		case 4:
+			"Q1"
+		default:
+			"?"
+		}
+	}
+
+	public var intervalType: Calendar.Component {
+		switch interval {
+		case 1, 10:
+			.minute
+		case 60:
+			.hour
+		case 24:
+			.day
+		case 7:
+			.weekOfMonth
+		case 31:
+			.month
+		case 4:
+			.quarter
+		default:
+			.day
+		}
+	}
+
+	public var timeInterval: Double {
+		switch interval {
+		case 1:
+			60
+		case 10:
+			600
+		case 60:
+			3600
+		case 24:
+			86400
+		case 7:
+			604800
+		default:
+			0
+		}
+	}
+}
+
+extension ChartDto {
+	public var csv: String {
+		let candles: String = candles.map { $0.csv }.joined(separator: "|")
+		return "\(exchange)\t\(board)\t\(secid)\t\(interval)\t\(candles)"
+	}
+}
+
+extension ChartDto {
+	public init(_ csv: String) throws {
+		let values: [String] = csv.components(separatedBy: "\t")
+		guard values.count == 5 else {
+			throw "ChartDto CSV Decoder error. values.count != 5"
+		}
+		let candleRows: [String] = values[4].components(separatedBy: "|")
+
+		guard let interval: Int = .init(values[3]) else {
+			throw "ChartDto CSV Decoder error."
+		}
+
+		self.init(
+			exchange: values[0],
+			board: values[1],
+			secid: values[2],
+			interval: interval,
+			candles: try candleRows.compactMap { try CandleDto($0) }
+		)
 	}
 }
