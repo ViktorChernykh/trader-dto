@@ -6,6 +6,8 @@
 //
 
 public enum TimeIntervalType: String, Codable, Sendable {
+	public static let schema: String = "time_interval_type"
+
 	case m1
 	case m10
 	case h1
