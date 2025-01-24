@@ -22,6 +22,7 @@ public struct BacktestSessionDto: Codable, Identifiable, Sendable {
 	public let totalTax: Double
 	public let drawdown: Double
 	public let drawup: Double
+	public let dealNumber: Int
 	public let duration: Double
 	public let name: String
 	public let description: String
@@ -43,6 +44,7 @@ public struct BacktestSessionDto: Codable, Identifiable, Sendable {
 		totalTax: Double,
 		drawdown: Double,
 		drawup: Double,
+		dealNumber: Int,
 		duration: Double,
 		name: String,
 		description: String,
@@ -62,6 +64,7 @@ public struct BacktestSessionDto: Codable, Identifiable, Sendable {
 		self.totalTax = totalTax
 		self.drawdown = drawdown
 		self.drawup = drawup
+		self.dealNumber = dealNumber
 		self.duration = duration
 		self.name = name
 		self.description = description
