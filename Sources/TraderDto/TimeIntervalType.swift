@@ -26,6 +26,7 @@ public enum TimeIntervalType: String, Codable, Sendable {
 	case q2
 	case y1
 
+	/// Timeframe quantity.
 	public var size: Int {
 		switch self {
 		case .m1:
