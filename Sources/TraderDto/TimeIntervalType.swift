@@ -5,8 +5,12 @@
 //  Created by Victor Chernykh on 20.01.2025.
 //
 
-public enum TimeIntervalType: String, Codable, Sendable {
+public enum TimeIntervalType: String, Codable, Sendable, CaseIterable, Identifiable {
 	public static let schema: String = "time_interval_type"
+
+	public var id: String {
+		rawValue
+	}
 
 	case m1
 	case m2

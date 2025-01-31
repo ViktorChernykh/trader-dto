@@ -26,9 +26,10 @@ public struct TaskDto: Codable, Sendable, Identifiable {
 	public var quantityTimes: Int
 	public let action: Int
 	public let expired: Date?
-	public let expireType: TaskDateType
+	public let expireType: TaskExpireType
 	public let name: String
 	public let notification: String
+	public let params: String
 	public let createdAt: Date
 
 	// MARK: - Init
@@ -48,9 +49,10 @@ public struct TaskDto: Codable, Sendable, Identifiable {
 		quantityTimes: Int,
 		action: Int,
 		expired: Date?,
-		expireType: TaskDateType,
+		expireType: TaskExpireType,
 		name: String,
 		notification: String,
+		params: String,
 		createdAt: Date
 	) {
 		self.id = id
@@ -71,6 +73,7 @@ public struct TaskDto: Codable, Sendable, Identifiable {
 		self.expireType = expireType
 		self.name = name
 		self.notification = notification
+		self.params = params
 		self.createdAt = createdAt
 	}
 }

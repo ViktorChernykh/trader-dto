@@ -64,9 +64,8 @@ public extension Date {
 		return calendar.date(from: components)!
 	}
 
-	func makeDateEnd() -> Date {
+	func makeDateEnd(timeZone: TimeZone = .init(identifier: "Europe/Moscow")!) -> Date {
 		var calendar: Calendar = .init(identifier: .gregorian)
-		let timeZone: TimeZone = .init(identifier: "Europe/Moscow")!
 		calendar.timeZone = timeZone
 
 		var components: DateComponents = calendar.dateComponents([.year, .month, .day], from: self)
