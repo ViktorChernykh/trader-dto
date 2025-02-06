@@ -12,23 +12,23 @@ public enum TimeIntervalType: String, Codable, Sendable, CaseIterable, Identifia
 		rawValue
 	}
 
-	case m1
-	case m2
-	case m3
-	case m5
-	case m10
-	case m15
-	case m30
-	case h1
-	case h2
-	case h3
-	case h4
-	case d1
-	case w1
-	case mn1
-	case q1
-	case q2
-	case y1
+	case m1 = "M1"
+	case m2 = "M2"
+	case m3 = "M3"
+	case m5 = "M5"
+	case m10 = "M10"
+	case m15 = "M15"
+	case m30 = "M30"
+	case h1 = "H1"
+	case h2 = "H2"
+	case h3 = "H3"
+	case h4 = "H4"
+	case d1 = "D1"
+	case w1 = "W1"
+	case mn1 = "MN1"
+	case q1 = "Q1"
+	case q2 = "Q2"
+	case y1 = "Y1"
 
 	/// Timeframe quantity.
 	public var size: Int {
@@ -106,6 +106,27 @@ public enum TimeIntervalType: String, Codable, Sendable, CaseIterable, Identifia
 			6
 		case .y1:
 			12
+		}
+	}
+
+	public init(moexInterval: Int) {
+		switch moexInterval {
+		case 1:
+			self = .m1
+		case 10:
+			self = .m10
+		case 60:
+			self = .h1
+		case 24:
+			self = .d1
+		case 7:
+			self = .w1
+		case 30:
+			self = .mn1
+		case 4:
+			self = .q1
+		default:
+			self = .h1
 		}
 	}
 }

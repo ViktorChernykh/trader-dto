@@ -33,8 +33,8 @@ extension ChartDto: Comparable {
 		lhs.id < rhs.id &&
 		lhs.exchange < rhs.exchange &&
 		lhs.board < rhs.board &&
-		lhs.secid < rhs.secid/* &&
-		lhs.candles < rhs.candles*/
+		lhs.secid < rhs.secid &&
+		lhs.candles.count < rhs.candles.count
 	}
 }
 
@@ -48,7 +48,7 @@ public struct ChartDto: Codable, Identifiable, Sendable {
 	public let exchange: String
 	public let board: String
 	public let secid: String
-	public let interval: Int
+	public var interval: Int
 	public var candles: [CandleDto]
 
 	// MARK: - Init
@@ -118,8 +118,12 @@ public struct ChartDto: Codable, Identifiable, Sendable {
 			3600
 		case 24:
 			86400
+		case 30:
+			2592000
 		case 7:
 			604800
+		case 4:
+			7948800
 		default:
 			0
 		}
