@@ -75,14 +75,26 @@ public extension Date {
 		return calendar.date(from: components)!
 	}
 
+	func makeDateBegine(timeZone: TimeZone = .init(identifier: "Europe/Moscow")!) -> Date {
+		var calendar: Calendar = .init(identifier: .gregorian)
+		calendar.timeZone = timeZone
+
+		var components: DateComponents = calendar.dateComponents([.year, .month, .day], from: self)
+		components.hour = 0
+		components.minute = 0
+		components.second = 0
+		return calendar.date(from: components)!
+	}
+
 	func get(_ components: Calendar.Component..., calendar: Calendar = Calendar.current) -> DateComponents {
 		calendar.dateComponents(Set(components), from: self)
 	}
 
 	/// Returns the value for one component of a date.
 	///
-	/// - parameter component: The component to calculate, like Component.year, .month, .day, .hour, .minute, .second, etc.
-	/// - parameter Calendar: encapsulates information about systems of reckoning time in which the beginning, length, and divisions of a year are defined.
+	/// - parameters:
+	///   - component: The component to calculate, like Component.year, .month, .day, .hour, .minute, .second, etc.
+	///   - calendar: encapsulates information about systems of reckoning time in which the beginning, length, and divisions of a year are defined.
 	/// - returns: The value for the component.
 	func get(_ component: Calendar.Component, calendar: Calendar = Calendar.current) -> Int {
 		calendar.component(component, from: self)

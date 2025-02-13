@@ -18,6 +18,7 @@ public struct LinesRequestDto: Codable, Sendable {
 	public let interval: Int
 	public let from: Date
 	public let to: Date
+	public let sessionId: UUID?
 
 	// MARK: - Init
 	public init(
@@ -26,7 +27,8 @@ public struct LinesRequestDto: Codable, Sendable {
 		secid: String,
 		interval: Int,
 		from: Date,
-		to: Date
+		to: Date,
+		sessionId: UUID?
 	) {
 		self.exchange = exchange
 		self.board = board
@@ -34,12 +36,14 @@ public struct LinesRequestDto: Codable, Sendable {
 		self.interval = interval
 		self.from = from
 		self.to = to
+		self.sessionId = sessionId
 	}
 }
 
 extension LinesRequestDto {
 	public var csv: String {
-		"\(exchange)\t\(board)\t\(secid)\t\(interval)\t\(from.timestampSec)\t\(to.timestampSec)"
+		let sessId: String = sessionId == nil ? "" : sessionId!.uuidString
+		return "\(exchange)\t\(board)\t\(secid)\t\(interval)\t\(from.timestampSec)\t\(to.timestampSec)\t\(sessId)"
 	}
 }
 
@@ -47,7 +51,7 @@ extension LinesRequestDto {
 	public init(_ csv: String) throws {
 		let values: [String] = csv.components(separatedBy: "\t")
 
-		guard values.count == 6 else {
+		guard values.count == 7 else {
 			throw "LinesRequestDto CSV Decoder: not enough data."
 		}
 		guard
@@ -64,7 +68,8 @@ extension LinesRequestDto {
 			secid: values[2],
 			interval: interval,
 			from: from,
-			to: to
+			to: to,
+			sessionId: UUID(uuidString: values[6])
 		)
 	}
 }

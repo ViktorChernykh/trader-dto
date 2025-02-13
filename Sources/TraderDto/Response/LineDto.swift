@@ -37,6 +37,7 @@ public struct LineDto: Codable, Sendable, Identifiable {
 	/// For group
 	public var canEdit: Bool
 	public var text: String
+	public let sessionId: UUID?
 
 	// MARK: - Init
 	public init(
@@ -55,7 +56,8 @@ public struct LineDto: Codable, Sendable, Identifiable {
 		y2: Double,
 		isShared: Bool,
 		canEdit: Bool,
-		text: String = ""
+		text: String = "",
+		sessionId: UUID? = nil
 	) {
 		self.id = id
 		self.exchange = exchange
@@ -73,6 +75,7 @@ public struct LineDto: Codable, Sendable, Identifiable {
 		self.isShared = isShared
 		self.canEdit = canEdit
 		self.text = text
+		self.sessionId = sessionId
 	}
 }
 
@@ -92,7 +95,9 @@ extension LineDto {
 			dx: dx,
 			y2: y2 + 10 / scaleY,
 			isShared: isShared,
-			canEdit: canEdit)
+			canEdit: canEdit,
+			sessionId: sessionId
+		)
 	}
 
 	public func makeUpdateDto() -> LineUpdateDto {
@@ -114,7 +119,8 @@ extension LineDto {
 
 extension LineDto {
 	public var csv: String {
-		"\(id)\t\(exchange)\t\(board)\t\(secid)\t\(interval)\t\(lineType.rawValue)\t\(width)\t\(color)\t\(x1Date.timestamp)\t\(y1)\t\(dx1)\t\(dx)\t\(y2)\t\(isShared ? "1" : "")\t\(canEdit ? "1" : "")\t\(text)"
+		let sessId: String = sessionId == nil ? "" : sessionId!.uuidString
+		return "\(id)\t\(exchange)\t\(board)\t\(secid)\t\(interval)\t\(lineType.rawValue)\t\(width)\t\(color)\t\(x1Date.timestamp)\t\(y1)\t\(dx1)\t\(dx)\t\(y2)\t\(isShared ? "1" : "")\t\(canEdit ? "1" : "")\t\(text)\t\(sessId)"
 	}
 }
 
@@ -123,7 +129,7 @@ extension LineDto {
 		let values: [String] = csv.components(separatedBy: "\t")
 
 		guard
-			values.count == 16,
+			values.count == 17,
 			let id: UUID = .init(uuidString: values[0]),
 			let interval: Int = .init(values[4]),
 			let lineType: LineType = .init(rawValue: values[5]),
@@ -154,7 +160,8 @@ extension LineDto {
 			y2: y2,
 			isShared: values[13] == "1",
 			canEdit: values[14] == "1",
-			text: values[15]
+			text: values[15],
+			sessionId: UUID(uuidString: values[16])
 		)
 	}
 }

@@ -108,7 +108,7 @@ public struct ChartDto: Codable, Identifiable, Sendable {
 		}
 	}
 
-	public var timeInterval: Double {
+	public var candleInterval: Double {
 		switch interval {
 		case 1:
 			60

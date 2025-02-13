@@ -17,5 +17,6 @@ public enum LineType: String, Codable, Sendable, CaseIterable, Identifiable {
 	case vertical
 	case fibonacci
 	case text
+	case ruler
 	case none
 }
