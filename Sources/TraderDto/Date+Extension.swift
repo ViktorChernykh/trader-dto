@@ -43,12 +43,12 @@ public extension Date {
 		return [from, to]
 	}
 
-	func makeDate(year: Int? = nil, month: Int? = nil, day: Int? = nil, hour: Int, minute: Int, second: Int = 0) -> Date {
+	static func makeDate(year: Int? = nil, month: Int? = nil, day: Int? = nil, hour: Int, minute: Int, second: Int = 0) -> Date {
 		var calendar: Calendar = .init(identifier: .gregorian)
 		let timeZone: TimeZone = .init(identifier: "Europe/Moscow")!
 		calendar.timeZone = timeZone
 
-		var components: DateComponents = calendar.dateComponents([.year, .month, .day], from: self)
+		var components: DateComponents = calendar.dateComponents([.year, .month, .day], from: Date())
 		if let year {
 			components.year = year
 		}
