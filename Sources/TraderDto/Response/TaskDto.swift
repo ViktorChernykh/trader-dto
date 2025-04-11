@@ -17,12 +17,13 @@ public struct TaskDto: Codable, Sendable, Identifiable {
 	public let market: String
 	public let board: String
 	public let secid: String
-	public let price1: Double
+	public var price1: Double
 	public let price2: Double?
 	public let decimals: Int
 	public let subjectType: SubjectType
 	public let compareType: CompareType
 	public let deviationType: DeviationType
+	public let deviation: Double
 	public var quantityTimes: Int
 	public let action: Int
 	public let expired: Date?
@@ -46,6 +47,7 @@ public struct TaskDto: Codable, Sendable, Identifiable {
 		subjectType: SubjectType,
 		compareType: CompareType,
 		deviationType: DeviationType,
+		deviation: Double,
 		quantityTimes: Int,
 		action: Int,
 		expired: Date?,
@@ -67,6 +69,7 @@ public struct TaskDto: Codable, Sendable, Identifiable {
 		self.subjectType = subjectType
 		self.compareType = compareType
 		self.deviationType = deviationType
+		self.deviation = deviation
 		self.quantityTimes = quantityTimes
 		self.action = action
 		self.expired = expired
@@ -86,5 +89,6 @@ extension TaskDto: Hashable {
 		hasher.combine(expired)
 		hasher.combine(expireType)
 		hasher.combine(name)
+		hasher.combine(params)
 	}
 }

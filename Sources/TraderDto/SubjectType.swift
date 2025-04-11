@@ -12,5 +12,6 @@ public enum SubjectType: String, Codable, Sendable, CaseIterable, Identifiable {
 
 	case price
 	case value
+	case line
 	case ema
 }
