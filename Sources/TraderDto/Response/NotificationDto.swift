@@ -17,7 +17,7 @@ public struct NotificationDto: Codable, Sendable, Identifiable {
 	public var text: String
 	public var type: NotificationLevelType
 	public var direction: WSDirectionType
-	public var action: Int
+	public var action: TaskActionType
 
 	// MARK: - Init
 	public init(
@@ -27,7 +27,7 @@ public struct NotificationDto: Codable, Sendable, Identifiable {
 		text: String = "",
 		type: NotificationLevelType = .low,
 		direction: WSDirectionType = .thisDevice,
-		action: Int = 0
+		action: TaskActionType = .notify
 	) {
 		self.id = id
 		self.date = date
@@ -53,7 +53,7 @@ extension NotificationDto: Hashable {
 
 extension NotificationDto {
 	public var csv: String {
-		"\(id.uuidString)\t\(date.timestamp)\t\(isRead ? "1" : "")\t\(text)\t\(type.rawValue)\t\(direction.rawValue)\t\(action)"
+		"\(id.uuidString)\t\(date.timestamp)\t\(isRead ? "1" : "")\t\(text)\t\(type.rawValue)\t\(direction.rawValue)\t\(action.rawValue)"
 	}
 }
 
@@ -67,7 +67,7 @@ extension NotificationDto {
 			let date: Date = values[1].datetime,
 			let type: NotificationLevelType = .init(rawValue: values[4]),
 			let direction: WSDirectionType = .init(rawValue: values[5]),
-			let action: Int = .init(values[6])
+			let action: TaskActionType = .init(rawValue: values[6])
 		else {
 			throw "NotificationDto CSV Decoder error."
 		}

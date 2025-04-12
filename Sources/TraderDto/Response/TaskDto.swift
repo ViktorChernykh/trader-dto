@@ -25,7 +25,7 @@ public struct TaskDto: Codable, Sendable, Identifiable {
 	public let deviationType: DeviationType
 	public let deviation: Double
 	public var quantityTimes: Int
-	public let action: Int
+	public let action: TaskActionType
 	public let expired: Date?
 	public let expireType: TaskExpireType
 	public let name: String
@@ -49,7 +49,7 @@ public struct TaskDto: Codable, Sendable, Identifiable {
 		deviationType: DeviationType,
 		deviation: Double,
 		quantityTimes: Int,
-		action: Int,
+		action: TaskActionType,
 		expired: Date?,
 		expireType: TaskExpireType,
 		name: String,
@@ -89,6 +89,7 @@ extension TaskDto: Hashable {
 		hasher.combine(expired)
 		hasher.combine(expireType)
 		hasher.combine(name)
+		hasher.combine(action)
 		hasher.combine(params)
 	}
 }
