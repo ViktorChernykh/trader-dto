@@ -40,10 +40,12 @@ public struct SecuritiesDto: Codable, Identifiable, Sendable {
 	public let secid: String
 	public let shortName: String
 	public let isQualifiedInvestors: Bool?
+	public let morningSession: Bool?
 	public let eveningSession: Bool?
+	public let weekendSession: Bool?
 	public let listLevel: Int?
 	public let lotSize: Int?
-	public let currencyId: String
+	public let currencyId: String?
 	public let decimals: Int
 	public let minStep: Double?
 	public var price: Double?
@@ -61,12 +63,14 @@ public struct SecuritiesDto: Codable, Identifiable, Sendable {
 		secid: String = "ABIO",
 		shortName: String = "Артген",
 		isQualifiedInvestors: Bool? = false,
+		morningSession: Bool? = true,
 		eveningSession: Bool? = true,
+		weekendSession: Bool? = true,
 		listLevel: Int? = 1,
 		lotSize: Int? = 1,
-		currencyId: String = "RUR",
+		currencyId: String? = "RUB",
 		decimals: Int = 2,
-		minStep: Double? = 0.1,
+		minStep: Double? = 0.05,
 		price: Double? = nil,
 		prevPrice: Double? = nil,
 		valToday: Int? = nil,
@@ -78,7 +82,9 @@ public struct SecuritiesDto: Codable, Identifiable, Sendable {
 		self.secid = secid
 		self.shortName = shortName
 		self.isQualifiedInvestors = isQualifiedInvestors
+		self.morningSession = morningSession
 		self.eveningSession = eveningSession
+		self.weekendSession = weekendSession
 		self.listLevel = listLevel
 		self.currencyId = currencyId
 		self.decimals = decimals
@@ -99,10 +105,12 @@ public struct SecuritiesDto: Codable, Identifiable, Sendable {
 		secid = try container.decode(String.self, forKey: .secid)
 		shortName = try container.decode(String.self, forKey: .shortName)
 		isQualifiedInvestors = try container.decodeIfPresent(Bool.self, forKey: .isQualifiedInvestors)
+		morningSession = try container.decodeIfPresent(Bool.self, forKey: .morningSession)
 		eveningSession = try container.decodeIfPresent(Bool.self, forKey: .eveningSession)
+		weekendSession = try container.decodeIfPresent(Bool.self, forKey: .weekendSession)
 		listLevel = try container.decodeIfPresent(Int.self, forKey: .listLevel)
 		lotSize = try container.decodeIfPresent(Int.self, forKey: .lotSize)
-		currencyId = try container.decode(String.self, forKey: .currencyId)
+		currencyId = try container.decodeIfPresent(String.self, forKey: .currencyId)
 		decimals = try container.decode(Int.self, forKey: .decimals)
 		minStep = try container.decodeIfPresent(Double.self, forKey: .minStep)
 		price = try container.decodeIfPresent(Double.self, forKey: .price)
@@ -119,7 +127,9 @@ public struct SecuritiesDto: Codable, Identifiable, Sendable {
 		case secid
 		case shortName
 		case isQualifiedInvestors
+		case morningSession
 		case eveningSession
+		case weekendSession
 		case listLevel
 		case lotSize
 		case currencyId
@@ -136,9 +146,10 @@ extension SecuritiesDto {
 	public var csv: String {
 		let _listLevel: String = listLevel == nil ? "" : "\(listLevel!)"
 		let _lotSize: String = lotSize == nil ? "" : "\(lotSize!)"
+		let _currencyId: String = currencyId == nil ? "" : "\(currencyId!)"
 		let _minStep: String = minStep == nil ? "" : "\(minStep!)"
 
-		return "\(id.uuidString)\t\(exchange)\t\(board)\t\(secid)\t\(shortName)\t\(convertBool(isQualifiedInvestors))\t\(convertBool(eveningSession))\t\(_listLevel )\t\(_lotSize)\t\(currencyId)\t\(decimals)\t\(_minStep)"
+		return "\(id.uuidString)\t\(exchange)\t\(board)\t\(secid)\t\(shortName)\t\(convertBool(isQualifiedInvestors))\t\(convertBool(morningSession))\t\(convertBool(eveningSession))\t\(convertBool(weekendSession))\t\(_listLevel )\t\(_lotSize)\t\(_currencyId)\t\(decimals)\t\(_minStep)"
 	}
 
 	func convertBool(_ value: Bool?) -> String {
@@ -154,9 +165,9 @@ extension SecuritiesDto {
 		let values: [String] = csv.components(separatedBy: "\t")
 
 		guard
-			values.count == 12,
+			values.count == 14,
 			let id: UUID = UUID(uuidString: values[0]),
-			let decimals: Int = .init(values[10])
+			let decimals: Int = .init(values[12])
 		else {
 			throw "SecuritiesDto CSV Decoder error."
 		}
@@ -168,13 +179,14 @@ extension SecuritiesDto {
 			secid: values[3],
 			shortName: values[4],
 			isQualifiedInvestors: values[5] == "" ? nil : values[5] == "1",
-			eveningSession: values[6] == "" ? nil : values[6] == "1",
-			listLevel: Int(values[7]),
-			lotSize: Int(values[8]),
-			currencyId: values[9],
+			morningSession: values[6] == "" ? nil : values[6] == "1",
+			eveningSession: values[7] == "" ? nil : values[7] == "1",
+			weekendSession: values[8] == "" ? nil : values[8] == "1",
+			listLevel: Int(values[9]),
+			lotSize: Int(values[10]),
+			currencyId: values[11],
 			decimals: decimals,
-			minStep: Double(values[11])
+			minStep: Double(values[13])
 		)
 	}
 }
-

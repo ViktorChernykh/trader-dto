@@ -27,8 +27,6 @@ public struct SecurityDto: Codable, Identifiable, Sendable {
 	// MARK: Stored properties
 	public let id: UUID
 	public let exchange: String
-	/// Moex id.
-	public let externalId: String
 	public let type: String
 	public let group: String
 	public let primaryBoardId: String
@@ -40,20 +38,16 @@ public struct SecurityDto: Codable, Identifiable, Sendable {
 	public let isin: String?
 	public let isTraded: Bool
 
-	public let emitentId: Int?
-	public let emitentTitle: String?
-	public let emitentInn: String?
-	public let emitentOkpo: String?
-
 	/// From security model.
 	public let isQualifiedInvestors: Bool?
 	public let morningSession: Bool?
 	public let eveningSession: Bool?
+	public let weekendSession: Bool?
 	public let typeName: String
 	public let issueSize: Int?
 	public let faceValue: Double?
 	public let faceUnit: String?
-	public let issueDate: Date
+	public let issueDate: Date?
 	public let latName: String
 	public let listLevel: Int?
 
@@ -72,7 +66,6 @@ public struct SecurityDto: Codable, Identifiable, Sendable {
 	public init(
 		id: UUID = UUID(),
 		exchange: String,
-		externalId: String,
 		type: String,
 		group: String,
 		primaryBoardId: String,
@@ -84,20 +77,16 @@ public struct SecurityDto: Codable, Identifiable, Sendable {
 		isin: String?,
 		isTraded: Bool,
 
-		emitentId: Int?,
-		emitentTitle: String?,
-		emitentInn: String?,
-		emitentOkpo: String?,
-
 		/// from security model
 		isQualifiedInvestors: Bool?,
 		morningSession: Bool?,
 		eveningSession: Bool?,
+		weekendSession: Bool?,
 		typeName: String,
 		issueSize: Int?,
 		faceValue: Double?,
 		faceUnit: String?,
-		issueDate: Date,
+		issueDate: Date?,
 		latName: String,
 		listLevel: Int?,
 
@@ -114,7 +103,6 @@ public struct SecurityDto: Codable, Identifiable, Sendable {
 	) {
 		self.id = id
 		self.exchange = exchange
-		self.externalId = externalId
 		self.type = type
 		self.group = group
 		self.primaryBoardId = primaryBoardId
@@ -126,14 +114,10 @@ public struct SecurityDto: Codable, Identifiable, Sendable {
 		self.isin = isin
 		self.isTraded = isTraded
 
-		self.emitentId = emitentId
-		self.emitentTitle = emitentTitle
-		self.emitentInn = emitentInn
-		self.emitentOkpo = emitentOkpo
-
 		self.isQualifiedInvestors = isQualifiedInvestors
 		self.morningSession = morningSession
 		self.eveningSession = eveningSession
+		self.weekendSession = weekendSession
 		self.typeName = typeName
 		self.issueSize = issueSize
 		self.faceValue = faceValue
