@@ -75,7 +75,7 @@ public extension Date {
 		return calendar.date(from: components)!
 	}
 
-	func makeDateBegine(timeZone: TimeZone = .init(identifier: "Europe/Moscow")!) -> Date {
+	func makeDateBegin(timeZone: TimeZone = .init(identifier: "Europe/Moscow")!) -> Date {
 		var calendar: Calendar = .init(identifier: .gregorian)
 		calendar.timeZone = timeZone
 
@@ -160,6 +160,13 @@ public extension Date {
 		} else {
 			calendar.date(bySettingHour: hour + 1, minute: 0, second: 0, of: self)!
 		}
+	}
+
+	var minute: String {
+		let dateFormatter: DateFormatter = .init()
+		dateFormatter.locale = Locale(identifier: "en_EN")
+		dateFormatter.dateFormat = "mm"
+		return dateFormatter.string(from: self)
 	}
 
 	var day: String {

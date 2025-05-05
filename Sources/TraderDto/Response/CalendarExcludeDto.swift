@@ -15,6 +15,8 @@ public struct CalendarExcludeDto: Codable, Sendable, Identifiable {
 	public let engine: String
 	public let date: Date
 	public let isWork: Bool
+	public let tradeSessionDate: Date?
+	public let reason: String
 
 	// MARK: - Init
 	public init(
@@ -22,13 +24,17 @@ public struct CalendarExcludeDto: Codable, Sendable, Identifiable {
 		exchange: ExchangeType,
 		engine: String,
 		date: Date,
-		isWork: Bool
+		isWork: Bool,
+		tradeSessionDate: Date?,
+		reason: String
 	) {
 		self.id = id
 		self.exchange = exchange
 		self.engine = engine
 		self.date = date
 		self.isWork = isWork
+		self.tradeSessionDate = tradeSessionDate
+		self.reason = reason
 	}
 }
 
@@ -39,5 +45,6 @@ extension CalendarExcludeDto: Hashable {
 		hasher.combine(engine)
 		hasher.combine(date)
 		hasher.combine(isWork)
+		hasher.combine(tradeSessionDate)
 	}
 }

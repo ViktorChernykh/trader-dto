@@ -54,7 +54,6 @@ public struct SecuritiesDto: Codable, Identifiable, Sendable {
 	/// Value today.
 	public var valToday: Int?
 	public var changePrice: Double
-	public var isFavorite: Bool
 
 	// MARK: - Init
 	public init(
@@ -75,8 +74,7 @@ public struct SecuritiesDto: Codable, Identifiable, Sendable {
 		price: Double? = nil,
 		prevPrice: Double? = nil,
 		valToday: Int? = nil,
-		changePrice: Double = 0.0,
-		isFavorite: Bool = false
+		changePrice: Double = 0.0
 	) {
 		self.id = id
 		self.exchange = exchange
@@ -96,7 +94,6 @@ public struct SecuritiesDto: Codable, Identifiable, Sendable {
 		self.prevPrice = prevPrice
 		self.valToday = valToday
 		self.changePrice = changePrice
-		self.isFavorite = isFavorite
 	}
 
 	/// Custom initializer for decoding
@@ -120,7 +117,6 @@ public struct SecuritiesDto: Codable, Identifiable, Sendable {
 		prevPrice = try container.decodeIfPresent(Double.self, forKey: .prevPrice)
 		valToday = try container.decodeIfPresent(Int.self, forKey: .valToday)
 		changePrice = try container.decodeIfPresent(Double.self, forKey: .changePrice) ?? 0.0
-		isFavorite = try container.decodeIfPresent(Bool.self, forKey: .isFavorite) ?? false
 	}
 
 	/// Coding keys for decoding.
@@ -143,7 +139,6 @@ public struct SecuritiesDto: Codable, Identifiable, Sendable {
 		case prevPrice
 		case valToday
 		case changePrice
-		case isFavorite
 	}
 }
 
