@@ -34,7 +34,7 @@ public struct DividendCreateDto: Codable, Sendable {
 
 extension DividendCreateDto {
 	public var csv: String {
-		"\(exchange)\t\(secid)\t\(lastDateBuy.date ?? "")\t\(dateClosed.date ?? "")\t\(period)"
+		"\(exchange)\t\(secid)\t\(lastDateBuy.dateMoex)\t\(dateClosed.dateMoex)\t\(period)"
 	}
 }
 
