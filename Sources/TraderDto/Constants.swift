@@ -7,9 +7,9 @@
 
 import Foundation
 
-enum Constants {
+public enum Constants {
 	@inline(__always)
-	static let moexDatetimeFormatter: DateFormatter = {
+	public static let moexDatetimeFormatter: DateFormatter = {
 		let dateFormatter: DateFormatter = .init()
 		// "en_US_POSIX" guarantees the format's independence from user settings
 		dateFormatter.locale = Locale(identifier: "en_US_POSIX")
@@ -19,7 +19,7 @@ enum Constants {
 	}()
 
 	@inline(__always)
-	static let moexDateFormatter: DateFormatter = {
+	public static let moexDateFormatter: DateFormatter = {
 		let dateFormatter: DateFormatter = .init()
 		// "en_US_POSIX" guarantees the format's independence from user settings
 		dateFormatter.locale = Locale(identifier: "en_US_POSIX")
@@ -29,7 +29,7 @@ enum Constants {
 	}()
 
 	@inline(__always)
-	static let moscowDatetimeFormatter: DateFormatter = {
+	public static let moscowDatetimeFormatter: DateFormatter = {
 		let dateFormatter: DateFormatter = .init()
 		// Formatting is independent of user settings thanks to "en_US_POSIX"
 		dateFormatter.locale = Locale(identifier: "en_US_POSIX")
@@ -39,7 +39,7 @@ enum Constants {
 	}()
 
 	@inline(__always)
-	static let moexMinuteDateFormatter: DateFormatter = {
+	public static let moexMinuteDateFormatter: DateFormatter = {
 		let dateFormatter: DateFormatter = .init()
 		dateFormatter.locale = Locale(identifier: "en_US_POSIX")
 		dateFormatter.dateFormat = "mm"
@@ -47,7 +47,7 @@ enum Constants {
 	}()
 
 	@inline(__always)
-	static let moexDayDateFormatter: DateFormatter = {
+	public static let moexDayDateFormatter: DateFormatter = {
 		let dateFormatter: DateFormatter = .init()
 		dateFormatter.locale = Locale(identifier: "en_US_POSIX")
 		dateFormatter.timeZone = TimeZone(identifier: "Europe/Moscow")
@@ -56,7 +56,7 @@ enum Constants {
 	}()
 
 	@inline(__always)
-	static let moexMonthDateFormatter: DateFormatter = {
+	public static let moexMonthDateFormatter: DateFormatter = {
 		let dateFormatter: DateFormatter = .init()
 		dateFormatter.locale = Locale(identifier: "en_US_POSIX")
 		dateFormatter.timeZone = TimeZone(identifier: "Europe/Moscow")
@@ -65,7 +65,7 @@ enum Constants {
 	}()
 
 	@inline(__always)
-	static let moexYearDateFormatter: DateFormatter = {
+	public static let moexYearDateFormatter: DateFormatter = {
 		let dateFormatter: DateFormatter = .init()
 		dateFormatter.locale = Locale(identifier: "en_US_POSIX")
 		dateFormatter.timeZone = TimeZone(identifier: "Europe/Moscow")
