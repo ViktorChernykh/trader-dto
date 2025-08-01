@@ -9,13 +9,16 @@ public enum BrokerType: Int, Codable, Sendable, CaseIterable, Identifiable {
 
 	public var id: Int { rawValue }
 
-	case alor = 0
-	case bcs = 1
-	case finam = 2
-	case tInvest = 3
+	case none = 0
+	case alor = 1
+	case bcs = 2
+	case finam = 3
+	case tInvest = 4
 
 	public var description: String {
 		switch self {
+		case .none:
+			"none"
 		case .alor:
 			"Alor"
 		case .bcs:
