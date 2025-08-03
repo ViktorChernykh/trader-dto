@@ -6,27 +6,22 @@
 //
 
 import struct Foundation.Data
+import struct Foundation.UUID
 
 /// Websocket response.
 public struct WSResponse: Codable, Sendable {
 
 	// MARK: Stored Properties
-	public let title: WSTitle
-	/// Unique message id, client <-> server.
-	public let id: String
-	public let dataType: WSDataType
+	/// Unique client's subscriptionId, client <-> server.
+	public let id: UUID
 	public let data: Data?
 
 	// MARK: - Init
 	public init(
-		title: WSTitle,
-		id: String,
-		dataType: WSDataType,
+		id: UUID,
 		data: Data?
 	) {
-		self.title = title
 		self.id = id
-		self.dataType = dataType
 		self.data = data
 	}
 }

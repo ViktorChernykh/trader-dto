@@ -6,13 +6,14 @@
 //
 
 import struct Foundation.Data
+import struct Foundation.UUID
 
 /// Websocket request to Trader.
 public struct WSRequest: Codable, Sendable {
 
 	// MARK: Stored properties
 	/// The ID of the message. It is used to search for the recipients.
-	public let id: String
+	public let id: UUID
 	public let module: ModuleType
 	public let controller: ControllerType
 	public let function: FunctionType
@@ -21,7 +22,7 @@ public struct WSRequest: Codable, Sendable {
 
 	// MARK: - Init
 	public init(
-		id: String,
+		id: UUID,
 		module: ModuleType,
 		controller: ControllerType,
 		function: FunctionType,
@@ -41,6 +42,5 @@ extension WSRequest: Hashable {
 		hasher.combine(module)
 		hasher.combine(controller)
 		hasher.combine(function)
-//		hasher.combine(data)
 	}
 }
