@@ -13,7 +13,7 @@ public struct WSRequest: Codable, Sendable {
 
 	// MARK: Stored properties
 	/// The ID of the message. It is used to search for the recipients.
-	public let id: UUID
+	public let id: String
 	public let module: ModuleType
 	public let controller: ControllerType
 	public let function: FunctionType
@@ -22,7 +22,7 @@ public struct WSRequest: Codable, Sendable {
 
 	// MARK: - Init
 	public init(
-		id: UUID,
+		id: String,
 		module: ModuleType,
 		controller: ControllerType,
 		function: FunctionType,
