@@ -5,7 +5,7 @@
 //  Created by Victor Chernykh on 05.07.2024.
 //
 
-public enum ModuleType: String, Codable, Sendable {
+public enum ModuleType: UInt8, Codable, Sendable {
 	case admin
 	case analize
 	case backtest
@@ -17,7 +17,7 @@ public enum ModuleType: String, Codable, Sendable {
 	case order
 }
 
-public enum ControllerType: String, Codable, Sendable {
+public enum ControllerType: UInt8, Codable, Sendable {
 	// Admin
 	case notification
 	case initMoex
@@ -36,7 +36,7 @@ public enum ControllerType: String, Codable, Sendable {
 	case order
 }
 
-public enum FunctionType: String, Codable, Sendable {
+public enum FunctionType: UInt8, Codable, Sendable {
 	case get
 	case list
 	case create
