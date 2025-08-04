@@ -1,5 +1,5 @@
 //
-//  WSRequest.swift
+//  WSMessage.swift
 //	trader-dto
 //
 //  Created by Victor Chernykh on 14.07.2024.
@@ -8,11 +8,11 @@
 import struct Foundation.Data
 import struct Foundation.UUID
 
-/// Websocket request to Trader.
-public struct WSRequest: Codable, Sendable {
+/// Websocket message to Trader.
+public struct WSMessage: Codable, Sendable {
 
 	// MARK: Stored properties
-	/// The ID of the message. It is used to search for the recipients.
+	/// The ID of the message. It is used to search for the receiver.
 	public let id: String
 	public let module: ModuleType
 	public let controller: ControllerType
@@ -33,14 +33,5 @@ public struct WSRequest: Codable, Sendable {
 		self.controller = controller
 		self.function = function
 		self.data = data
-	}
-}
-
-extension WSRequest: Hashable {
-	public func hash(into hasher: inout Hasher) {
-		hasher.combine(id)
-		hasher.combine(module)
-		hasher.combine(controller)
-		hasher.combine(function)
 	}
 }
