@@ -13,7 +13,7 @@ public struct WSMessage: Codable, Sendable {
 
 	// MARK: Stored properties
 	/// The ID of the message. It is used to search for the receiver.
-	public let id: String
+	public var id: String
 	public let module: ModuleType
 	public let controller: ControllerType
 	public let function: FunctionType
