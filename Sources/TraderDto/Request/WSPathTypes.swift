@@ -5,7 +5,8 @@
 //  Created by Victor Chernykh on 05.07.2024.
 //
 
-public enum ModuleType: UInt8, Codable, Sendable {
+public enum ModuleType: UInt8, Sendable {
+	case none
 	case admin
 	case analize
 	case backtest
@@ -15,10 +16,12 @@ public enum ModuleType: UInt8, Codable, Sendable {
 	case terminal
 	case user
 	case order
+	case webSocket
 }
 
-public enum ControllerType: UInt8, Codable, Sendable {
+public enum ControllerType: UInt8, Sendable {
 	// Admin
+	case none
 	case notification
 	case initMoex
 	case dividend
@@ -34,13 +37,20 @@ public enum ControllerType: UInt8, Codable, Sendable {
 
 	// Order
 	case order
+
+	// webSocket
+	case subscription
 }
 
-public enum FunctionType: UInt8, Codable, Sendable {
+public enum FunctionType: UInt8, Sendable {
+	case none
 	case get
 	case list
 	case create
 	case patch
 	case update
 	case delete
+	// webSocket
+	case subscribe
+	case unsubscribe
 }
