@@ -18,7 +18,8 @@ public struct ChatMessageDto: Sendable {
 	public let text: String
 	public let attachments: String
 	public let status: Int
-	public let createdAt: Date
+	/// Date created sets on server.
+	public var createdAt: Date?
 
 	// MARK: - Init
 	public init(
@@ -28,7 +29,7 @@ public struct ChatMessageDto: Sendable {
 		text: String,
 		attachments: String,
 		status: Int,
-		createdAt: Date
+		createdAt: Date?
 	) {
 		self.id = id
 		self.senderId = senderId
@@ -42,7 +43,8 @@ public struct ChatMessageDto: Sendable {
 
 extension ChatMessageDto {
 	public var csv: String {
-		"\(id.uuidString)\t\(senderId.uuidString)\t\(receiverId.uuidString)\t\(text.replacingOccurrences(of: "\t", with: "  "))\t\(attachments)\t\(status)\t\(createdAt.timestamp)"
+		let createdAtDate: String = createdAt != nil ? "\t\(createdAt!.timestamp)" : ""
+		return "\(id.uuidString)\t\(senderId.uuidString)\t\(receiverId.uuidString)\t\(text.replacingOccurrences(of: "\t", with: "  "))\t\(attachments)\t\(status)\(createdAtDate)"
 	}
 }
 
@@ -51,15 +53,15 @@ extension ChatMessageDto {
 		let values: [String] = csv.components(separatedBy: "\t")
 
 		guard
-			values.count == 7,
+			values.count >= 6,
 			let id: UUID = .init(uuidString: values[0]),
 			let senderId: UUID = .init(uuidString: values[1]),
 			let receiverId: UUID = .init(uuidString: values[2]),
-			let status: Int = .init(values[5]),
-			let createdAt: Date = values[6].datetime
+			let status: Int = .init(values[5])
 		else {
 			throw "ChatMessageDto CSV Decoder error."
 		}
+		let createdAt: Date? = values.count == 7 ? values[6].datetime : nil
 
 		self.init(
 			id: id,
