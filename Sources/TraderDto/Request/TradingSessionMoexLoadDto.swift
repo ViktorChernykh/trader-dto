@@ -102,7 +102,6 @@ extension TradingSessionMoexLoadDto {
 					th: th,
 					tm: tm,
 					ts: ts,
-					timeZone: 3,
 					sessionType: sessionType,
 					tradingMode: tradingMode,
 					note: values[4]

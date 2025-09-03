@@ -16,7 +16,6 @@ public struct TradingCalendarDto: Codable, Sendable, Identifiable {
 	public let board: String
 	public let from: Date
 	public let to: Date
-	public let timeZone: Int
 	public let sessionType: TradingSessionType
 	public let tradingMode: TradingMode
 
@@ -28,7 +27,6 @@ public struct TradingCalendarDto: Codable, Sendable, Identifiable {
 		board: String,
 		from: Date,
 		to: Date,
-		timeZone: Int,
 		sessionType: TradingSessionType,
 		tradingMode: TradingMode
 	) {
@@ -38,7 +36,6 @@ public struct TradingCalendarDto: Codable, Sendable, Identifiable {
 		self.board = board
 		self.from = from
 		self.to = to
-		self.timeZone = timeZone
 		self.sessionType = sessionType
 		self.tradingMode = tradingMode
 	}
