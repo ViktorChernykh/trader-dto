@@ -5,6 +5,8 @@
 //  Created by Victor Chernykh on 03.01.2025.
 //
 
+import Foundation
+
 public enum ExchangeType: String, Codable, Sendable, CaseIterable, Identifiable {
 
 	// MARK: Static properties
@@ -19,8 +21,10 @@ public enum ExchangeType: String, Codable, Sendable, CaseIterable, Identifiable 
 	case lse = "LSE"
 	case fwb = "FWB"
 	case hkse = "HKSE"
+	case sgx = "SGX"
 	case sse = "SSE"
 	case szse = "SZSE"
+	case tse = "TSE"
 	case binance = "Binance"
 	case huobi = "Huobi"
 	case bybit = "Bybit"
@@ -43,10 +47,14 @@ public enum ExchangeType: String, Codable, Sendable, CaseIterable, Identifiable 
 			"Frankfurt Stock Exchange"
 		case .hkse:
 			"Hong Kong Stock Exchange"
+		case .sgx:
+			"Singapore Exchange"
 		case .sse:
 			"Shanghai Stock Exchange"
 		case .szse:
 			"Shenzhen Stock Exchange"
+		case .tse:
+			"Tokyo Stock Exchange"
 		case .binance:
 			"Binance"
 		case .huobi:
@@ -60,36 +68,40 @@ public enum ExchangeType: String, Codable, Sendable, CaseIterable, Identifiable 
 		}
 	}
 
-	public var timeZone: Int {
+	public var timeZone: TimeZone? {
 		switch self {
 		case .moex:
-			3
+			return TimeZone(identifier: "Europe/Moscow")
 		case .spb:
-			3
+			return TimeZone(identifier: "Europe/Moscow")
 		case .nise:
-			-5
+			return TimeZone(identifier: "America/New_York")
 		case .nasdaq:
-			-5
+			return TimeZone(identifier: "America/New_York")
 		case .lse:
-			0
+			return TimeZone(identifier: "Europe/London")
 		case .fwb:
-			1
+			return TimeZone(identifier: "Europe/Berlin")
 		case .hkse:
-			8
+			return TimeZone(identifier: "Asia/Hong_Kong")
+		case .sgx:
+			return TimeZone(identifier: "Asia/Singapore")
 		case .sse:
-			8
+			return TimeZone(identifier: "Asia/Shanghai")
 		case .szse:
-			8
+			return TimeZone(identifier: "Asia/Shanghai")
+		case .tse:
+			return TimeZone(identifier: "Asia/Tokyo")
 		case .binance:
-			0
+			return TimeZone(identifier: "GMT")
 		case .huobi:
-			0
+			return TimeZone(identifier: "GMT")
 		case .bybit:
-			0
+			return TimeZone(identifier: "GMT")
 		case .bitget:
-			0
+			return TimeZone(identifier: "GMT")
 		case .gateIo:
-			0
+			return TimeZone(identifier: "GMT")
 		}
 	}
 }

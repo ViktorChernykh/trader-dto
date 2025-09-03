@@ -13,4 +13,5 @@ public enum TradingMode: String, Codable, Sendable, CaseIterable, Identifiable {
 	case trading
 	case preMarket
 	case postMarket
+	case all
 }
