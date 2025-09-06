@@ -26,7 +26,7 @@ extension TradingSessionMoexLoadDto {
 		for row in rows {
 			let values: [String] = row.components(separatedBy: ";")
 
-			guard values.count == 5 else {
+			guard values.count == 6 else {
 				throw "TradingSessionMoexLoadDto CSV Decoder not enough items."
 			}
 
@@ -35,17 +35,9 @@ extension TradingSessionMoexLoadDto {
 			guard
 				components1.count > 2,
 				var fh: Int = .init(components1[0]),
-				let fm: Int = .init(components1[1]) else {
+				let fm: Int = .init(components1[1]),
+				let fs: Int = .init(components1[2]) else {
 				throw "TradingSessionMoexLoadDto CSV invalid time from."
-			}
-			let comp1: [String] = components1[2].components(separatedBy: " ")
-			guard
-				comp1.count > 1,
-				let fs: Int = .init(comp1[0]) else {
-				throw "TradingSessionMoexLoadDto CSV invalid time from."
-			}
-			if values[0].hasSuffix("PM") {
-				fh += 12
 			}
 
 			// End
@@ -53,17 +45,9 @@ extension TradingSessionMoexLoadDto {
 			guard
 				components2.count > 2,
 				var th: Int = .init(components2[0]),
-				let tm: Int = .init(components2[1]) else {
+				let tm: Int = .init(components2[1]),
+				let ts: Int = .init(components2[2]) else {
 				throw "TradingSessionMoexLoadDto CSV invalid time to."
-			}
-			let comp2: [String] = components2[2].components(separatedBy: " ")
-			guard
-				comp2.count > 1,
-				let ts: Int = .init(comp2[0]) else {
-				throw "TradingSessionMoexLoadDto CSV invalid time from."
-			}
-			if values[1].hasSuffix("PM") {
-				th += 12
 			}
 
 			// TradingMode
@@ -90,11 +74,20 @@ extension TradingSessionMoexLoadDto {
 				.evening
 			}
 
+			let engine: String = switch values[3] {
+			case "TQBR":
+				"stock"
+			case "RFUD":
+				"futures"
+			default:
+				""
+			}
+
 			sessions.append(
 				TradingSessionDto(
 					id: UUID(),
 					exchange: .moex,
-					engine: "",
+					engine: engine,
 					board: values[3],
 					fh: fh,
 					fm: fm,
