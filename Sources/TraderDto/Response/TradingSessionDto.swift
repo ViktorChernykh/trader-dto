@@ -29,6 +29,7 @@ public struct TradingSessionDto: Codable, Sendable, Identifiable {
 	public let ts: Int
 	public let sessionType: TradingSessionType
 	public let tradingMode: TradingMode
+	public let dayType: String
 	public let note: String
 
 	// MARK: - Init
@@ -45,6 +46,7 @@ public struct TradingSessionDto: Codable, Sendable, Identifiable {
 		ts: Int,
 		sessionType: TradingSessionType,
 		tradingMode: TradingMode,
+		dayType: String,
 		note: String
 	) {
 		self.id = id
@@ -59,6 +61,7 @@ public struct TradingSessionDto: Codable, Sendable, Identifiable {
 		self.ts = ts
 		self.sessionType = sessionType
 		self.tradingMode = tradingMode
+		self.dayType = dayType
 		self.note = note
 	}
 }
