@@ -8,7 +8,7 @@
 public enum ModuleType: UInt8, Sendable {
 	case none
 	case admin
-	case analize
+	case analyze
 	case backtest
 	case chat
 	case finam
