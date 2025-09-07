@@ -68,7 +68,7 @@ extension TradingSessionMoexLoadDto {
 			// TradingSessionType
 			let sessionType: TradingSessionType = if fh < 9 {
 				.morning
-			} else if fh < 18 {
+			} else if fh < 19 {
 				.main
 			} else {
 				.evening
