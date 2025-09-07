@@ -12,5 +12,5 @@ public enum NotificationLevelType: String, Codable, Sendable, CaseIterable, Iden
 
 	case low
 	case middle
-	case height
+	case high
 }
