@@ -17,7 +17,7 @@ public struct TradingCalendarDto: Codable, Sendable, Identifiable {
 	public let from: Date
 	public let to: Date
 	public let sessionType: TradingSessionType
-	public let tradingMode: TradingMode
+	public let tradingType: TradingType
 
 	// MARK: - Init
 	public init(
@@ -28,7 +28,7 @@ public struct TradingCalendarDto: Codable, Sendable, Identifiable {
 		from: Date,
 		to: Date,
 		sessionType: TradingSessionType,
-		tradingMode: TradingMode
+		tradingType: TradingType
 	) {
 		self.id = id
 		self.exchange = exchange
@@ -37,6 +37,6 @@ public struct TradingCalendarDto: Codable, Sendable, Identifiable {
 		self.from = from
 		self.to = to
 		self.sessionType = sessionType
-		self.tradingMode = tradingMode
+		self.tradingType = tradingType
 	}
 }

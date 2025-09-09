@@ -45,7 +45,7 @@ public extension Date {
 	}
 
 	@inline(__always)
-	static func makeDate(year: Int? = nil, month: Int? = nil, day: Int? = nil, hour: Int, minute: Int, second: Int = 0) -> Date {
+	static func makeDate(year: Int? = nil, month: Int? = nil, day: Int? = nil, hour: Int, minute: Int, second: Int = 0, nanoseconds: Int = 0) -> Date {
 		var calendar: Calendar = .init(identifier: .gregorian)
 		let timeZone: TimeZone = .init(identifier: "Europe/Moscow")!
 		calendar.timeZone = timeZone
@@ -63,7 +63,7 @@ public extension Date {
 		components.hour = hour
 		components.minute = minute
 		components.second = second
-		components.nanosecond = 0
+		components.nanosecond = nanoseconds
 		return calendar.date(from: components)!
 	}
 

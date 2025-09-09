@@ -16,6 +16,7 @@ public enum ModuleType: UInt8, Sendable {
 	case terminal
 	case user
 	case order
+	case schedule
 	case webSocket
 }
 

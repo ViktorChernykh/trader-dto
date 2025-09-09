@@ -28,7 +28,7 @@ public struct TradingSessionDto: Codable, Sendable, Identifiable {
 	/// to second
 	public let ts: Int
 	public let sessionType: TradingSessionType
-	public let tradingMode: TradingMode
+	public let tradingType: TradingType
 	public let dayType: String
 	public let note: String
 
@@ -45,7 +45,7 @@ public struct TradingSessionDto: Codable, Sendable, Identifiable {
 		tm: Int,
 		ts: Int,
 		sessionType: TradingSessionType,
-		tradingMode: TradingMode,
+		tradingType: TradingType,
 		dayType: String,
 		note: String
 	) {
@@ -60,7 +60,7 @@ public struct TradingSessionDto: Codable, Sendable, Identifiable {
 		self.tm = tm
 		self.ts = ts
 		self.sessionType = sessionType
-		self.tradingMode = tradingMode
+		self.tradingType = tradingType
 		self.dayType = dayType
 		self.note = note
 	}

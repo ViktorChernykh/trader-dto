@@ -50,8 +50,8 @@ extension TradingSessionMoexLoadDto {
 				throw "TradingSessionMoexLoadDto CSV invalid time to."
 			}
 
-			// TradingMode
-			let tradingMode: TradingMode? = switch values[2] {
+			// TradingType
+			let tradingType: TradingType? = switch values[2] {
 			case "аукцион открытия":
 					.preMarket
 			case "торговый период":
@@ -61,8 +61,8 @@ extension TradingSessionMoexLoadDto {
 			default:
 				nil
 			}
-			guard let tradingMode else {
-				throw "TradingSessionMoexLoadDto CSV Decoder tradingMode: TradingMode error."
+			guard let tradingType else {
+				throw "TradingSessionMoexLoadDto CSV Decoder tradingType: TradingType error."
 			}
 
 			// TradingSessionType
@@ -96,7 +96,7 @@ extension TradingSessionMoexLoadDto {
 					tm: tm,
 					ts: ts,
 					sessionType: sessionType,
-					tradingMode: tradingMode,
+					tradingType: tradingType,
 					dayType: values[5],
 					note: values[4]
 				)
