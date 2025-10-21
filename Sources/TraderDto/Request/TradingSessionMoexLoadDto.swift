@@ -25,6 +25,9 @@ extension TradingSessionMoexLoadDto {
 
 		for row in rows {
 			let values: [String] = row.components(separatedBy: ";")
+			guard values.count > 1 else {
+				continue
+			}
 
 			guard values.count == 6 else {
 				throw "TradingSessionMoexLoadDto CSV Decoder not enough items."
