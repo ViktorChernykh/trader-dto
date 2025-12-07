@@ -83,7 +83,7 @@ public enum TimeIntervalType: String, Codable, Sendable, CaseIterable, Identifia
 		case .w1:
 			7
 		case .mn1:
-			30
+			31
 		case .q1:
 			4
 		default:
@@ -103,7 +103,7 @@ public enum TimeIntervalType: String, Codable, Sendable, CaseIterable, Identifia
 			self = .d1
 		case 7:
 			self = .w1
-		case 30:
+		case 31:
 			self = .mn1
 		case 4:
 			self = .q1
