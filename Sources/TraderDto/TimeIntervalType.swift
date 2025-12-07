@@ -31,46 +31,7 @@ public enum TimeIntervalType: String, Codable, Sendable, CaseIterable, Identifia
 	case y1 = "Y1"
 
 	/// Timeframe quantity.
-	public var size: Int {
-		switch self {
-		case .m1:
-			1
-		case .m2:
-			2
-		case .m3:
-			3
-		case .m5:
-			5
-		case .m10:
-			10
-		case .m15:
-			15
-		case .m30:
-			30
-		case .h1:
-			1
-		case .h2:
-			2
-		case .h3:
-			3
-		case .h4:
-			4
-		case .d1:
-			1
-		case .w1:
-			1
-		case .mn1:
-			1
-		case .q1:
-			1
-		case .q2:
-			2
-		case .y1:
-			1
-		}
-	}
-
-	public var moexInterval: Int {
+	public var int: Int {
 		switch self {
 		case .m1:
 			1
@@ -99,17 +60,38 @@ public enum TimeIntervalType: String, Codable, Sendable, CaseIterable, Identifia
 		case .w1:
 			7
 		case .mn1:
-			30
+			31
 		case .q1:
-			4
+			91
 		case .q2:
-			6
+			182
 		case .y1:
-			12
+			365
 		}
 	}
 
-	public init(moexInterval: Int) {
+	public var moexInterval: Int? {
+		switch self {
+		case .m1:
+			1
+		case .m10:
+			10
+		case .h1:
+			60
+		case .d1:
+			24
+		case .w1:
+			7
+		case .mn1:
+			30
+		case .q1:
+			4
+		default:
+			nil
+		}
+	}
+
+	public init?(moexInterval: Int) {
 		switch moexInterval {
 		case 1:
 			self = .m1
@@ -126,7 +108,7 @@ public enum TimeIntervalType: String, Codable, Sendable, CaseIterable, Identifia
 		case 4:
 			self = .q1
 		default:
-			self = .h1
+			return nil
 		}
 	}
 }
