@@ -16,11 +16,11 @@ public struct CandleDto: Codable, Identifiable, Sendable {
 	// MARK: Stored properties
 	public let id: Int
 	public let opens: Double
-	public let close: Double
-	public let high: Double
-	public let low: Double
-	public let value: Double
-	public let volume: Int
+	public var close: Double
+	public var high: Double
+	public var low: Double
+	public var value: Double
+	public var volume: Int
 	public let begin: Date
 
 	// MARK: - Init
