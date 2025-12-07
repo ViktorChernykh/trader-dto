@@ -37,7 +37,7 @@ extension TradingSessionMoexLoadDto {
 			let components1: [String] = values[0].components(separatedBy: ":")
 			guard
 				components1.count > 2,
-				var fh: Int = .init(components1[0]),
+				let fh: Int = .init(components1[0]),
 				let fm: Int = .init(components1[1]),
 				let fs: Int = .init(components1[2]) else {
 				throw "TradingSessionMoexLoadDto CSV invalid time from."
@@ -47,7 +47,7 @@ extension TradingSessionMoexLoadDto {
 			let components2: [String] = values[1].components(separatedBy: ":")
 			guard
 				components2.count > 2,
-				var th: Int = .init(components2[0]),
+				let th: Int = .init(components2[0]),
 				let tm: Int = .init(components2[1]),
 				let ts: Int = .init(components2[2]) else {
 				throw "TradingSessionMoexLoadDto CSV invalid time to."

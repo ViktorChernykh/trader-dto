@@ -13,7 +13,6 @@ public struct LineDto: Codable, Sendable, Identifiable {
 
 	// MARK: Stored properties
 	public let id: UUID
-	public let exchange: String
 	public let board: String
 	public let secid: String
 	public let interval: Int
@@ -42,7 +41,6 @@ public struct LineDto: Codable, Sendable, Identifiable {
 	// MARK: - Init
 	public init(
 		id: UUID = .init(),
-		exchange: String,
 		board: String,
 		secid: String,
 		interval: Int,
@@ -60,7 +58,6 @@ public struct LineDto: Codable, Sendable, Identifiable {
 		sessionId: UUID? = nil
 	) {
 		self.id = id
-		self.exchange = exchange
 		self.board = board
 		self.secid = secid
 		self.interval = interval
@@ -82,7 +79,6 @@ public struct LineDto: Codable, Sendable, Identifiable {
 extension LineDto {
 	public func duplicate(scaleY: Double) -> Self {
 		.init(
-			exchange: exchange,
 			board: board,
 			secid: secid,
 			interval: interval,
@@ -120,7 +116,7 @@ extension LineDto {
 extension LineDto {
 	public var csv: String {
 		let sessId: String = sessionId == nil ? "" : sessionId!.uuidString
-		return "\(id)\t\(exchange)\t\(board)\t\(secid)\t\(interval)\t\(lineType.rawValue)\t\(width)\t\(color)\t\(x1Date.timestamp)\t\(y1)\t\(dx1)\t\(dx)\t\(y2)\t\(isShared ? "1" : "")\t\(canEdit ? "1" : "")\t\(text)\t\(sessId)"
+		return "\(id)\t\(board)\t\(secid)\t\(interval)\t\(lineType.rawValue)\t\(width)\t\(color)\t\(x1Date.timestamp)\t\(y1)\t\(dx1)\t\(dx)\t\(y2)\t\(isShared ? "1" : "")\t\(canEdit ? "1" : "")\t\(text)\t\(sessId)"
 	}
 }
 
@@ -129,39 +125,38 @@ extension LineDto {
 		let values: [String] = csv.components(separatedBy: "\t")
 
 		guard
-			values.count == 17,
+			values.count == 16,
 			let id: UUID = .init(uuidString: values[0]),
-			let interval: Int = .init(values[4]),
-			let lineType: LineType = .init(rawValue: values[5]),
-			let width: Int = .init(values[6]),
+			let interval: Int = .init(values[3]),
+			let lineType: LineType = .init(rawValue: values[4]),
+			let width: Int = .init(values[5]),
 
-			let x1Date: Date = values[8].datetime,
-			let y1: Double = .init(values[9]),
-			let dx1: Double = .init(values[10]),
-			let dx: Double = .init(values[11]),
-			let y2: Double = .init(values[12])
+			let x1Date: Date = values[7].datetime,
+			let y1: Double = .init(values[8]),
+			let dx1: Double = .init(values[9]),
+			let dx: Double = .init(values[10]),
+			let y2: Double = .init(values[11])
 		else {
 			throw "LineDto csv decoder error."
 		}
 
 		self.init(
 			id: id,
-			exchange: values[1],
-			board: values[2],
-			secid: values[3],
+			board: values[1],
+			secid: values[2],
 			interval: interval,
 			lineType: lineType,
 			width: width,
-			color: values[7],
+			color: values[6],
 			x1Date: x1Date,
 			y1: y1,
 			dx1: dx1,
 			dx: dx,
 			y2: y2,
-			isShared: values[13] == "1",
-			canEdit: values[14] == "1",
-			text: values[15],
-			sessionId: UUID(uuidString: values[16])
+			isShared: values[12] == "1",
+			canEdit: values[13] == "1",
+			text: values[14],
+			sessionId: UUID(uuidString: values[15])
 		)
 	}
 }

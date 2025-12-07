@@ -12,7 +12,6 @@ import struct Foundation.UUID
 public struct LinesRequestDto: Codable, Sendable {
 
 	// MARK: Stored properties
-	public let exchange: String
 	public let board: String
 	public let secid: String
 	public let interval: Int
@@ -22,7 +21,6 @@ public struct LinesRequestDto: Codable, Sendable {
 
 	// MARK: - Init
 	public init(
-		exchange: String,
 		board: String,
 		secid: String,
 		interval: Int,
@@ -30,7 +28,6 @@ public struct LinesRequestDto: Codable, Sendable {
 		to: Date,
 		sessionId: UUID?
 	) {
-		self.exchange = exchange
 		self.board = board
 		self.secid = secid
 		self.interval = interval
@@ -43,7 +40,7 @@ public struct LinesRequestDto: Codable, Sendable {
 extension LinesRequestDto {
 	public var csv: String {
 		let sessId: String = sessionId == nil ? "" : sessionId!.uuidString
-		return "\(exchange)\t\(board)\t\(secid)\t\(interval)\t\(from.timestampSec)\t\(to.timestampSec)\t\(sessId)"
+		return "\(board)\t\(secid)\t\(interval)\t\(from.timestampSec)\t\(to.timestampSec)\t\(sessId)"
 	}
 }
 
@@ -51,25 +48,24 @@ extension LinesRequestDto {
 	public init(_ csv: String) throws {
 		let values: [String] = csv.components(separatedBy: "\t")
 
-		guard values.count == 7 else {
+		guard values.count == 6 else {
 			throw "LinesRequestDto CSV Decoder: not enough data."
 		}
 		guard
-			let interval: Int = .init(values[3]),
-			let from: Date = values[4].datetime,
-			let to: Date = values[5].datetime
+			let interval: Int = .init(values[2]),
+			let from: Date = values[3].datetime,
+			let to: Date = values[4].datetime
 		else {
 			throw "LinesRequestDto CSV Decoder error LinesRequestDto."
 		}
 
 		self.init(
-			exchange: values[0],
-			board: values[1],
-			secid: values[2],
+			board: values[0],
+			secid: values[1],
 			interval: interval,
 			from: from,
 			to: to,
-			sessionId: UUID(uuidString: values[6])
+			sessionId: UUID(uuidString: values[5])
 		)
 	}
 }
